@@ -8,9 +8,9 @@ FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 WORKDIR /src
 COPY . /src
 
-# ✅ Instala o pnpm diretamente, sem corepack
+# ✅ Corrige conflito de binário existente com --force
 RUN npm config set registry https://registry.npmjs.org
-RUN npm install -g pnpm@8.15.1
+RUN npm install -g pnpm@8.15.1 --force
 
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
     --mount=type=cache,id=pnpm-metadata,target=/root/.cache/pnpm/metadata \
