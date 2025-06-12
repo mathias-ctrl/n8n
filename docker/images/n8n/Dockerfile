@@ -8,7 +8,8 @@ FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 WORKDIR /src
 COPY . /src
 
-# Adicionado para evitar erro de timeout ao baixar o pnpm
+# ⚠️ Correção: força o uso do registry oficial antes de ativar o pnpm
+RUN npm config set registry https://registry.npmjs.org
 RUN corepack enable && corepack prepare pnpm@8.15.1 --activate
 
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
