@@ -8,9 +8,9 @@ FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 WORKDIR /src
 COPY . /src
 
-# ⚠️ Correção: força o uso do registry oficial antes de ativar o pnpm
+# ✅ Instala o pnpm diretamente, sem corepack
 RUN npm config set registry https://registry.npmjs.org
-RUN corepack enable && corepack prepare pnpm@8.15.1 --activate
+RUN npm install -g pnpm@8.15.1
 
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
     --mount=type=cache,id=pnpm-metadata,target=/root/.cache/pnpm/metadata \
