@@ -989,7 +989,9 @@ export function getNodeWebhookUrl(
 	if (path.startsWith('/')) {
 		path = path.slice(1);
 	}
-	return `${baseUrl}/${getNodeWebhookPath(workflowId, node, path, isFullPath)}`;
+	// MODIFICAÇÃO: Remover o "webhook/" do path
+	const webhookPath = getNodeWebhookPath(workflowId, node, path, isFullPath);
+	return `${baseUrl}/${webhookPath}`;
 }
 
 export function getConnectionTypes(
